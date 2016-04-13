@@ -27,7 +27,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
 
 	m, _ := url.ParseQuery(r.URL.RawQuery)
 	fmt.Println(m["hub.verify_token"])
-	if len(m["hub.verify_token"]) > 0 && m["hub.verify_token"][0] == "sd67s687" && len(m["hub.challenge"]) > 0 {
+	if len(m["hub.verify_token"]) > 0 && m["hub.verify_token"][0] == os.Getenv("FB_VERIFY_TOKEN") && len(m["hub.challenge"]) > 0 {
 		fmt.Fprintf(w, m["hub.challenge"][0])
 		return
 	}
